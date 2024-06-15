@@ -81,25 +81,25 @@ programa {
     }
     senao{
     limpa()
-    escreva("Informe a data de entrada\n")
+    escreva("Informe a data de entrada(ex:10/9/24)\n")
     leia(data[ponteiro])
     limpa()
-    escreva("Informe o nome do cliente\n")
+    escreva("Informe o nome do cliente(ex: Paulo Henrique)\n")
     leia(nome[ponteiro])
     limpa()
-    escreva("Informe o equipamento\n")
+    escreva("Informe o equipamento(Celular)\n")
     leia(equipamento[ponteiro])
     limpa()
-    escreva("informe o problema\n")
+    escreva("informe o problema(Parou de ligar)\n")
     leia(problema[ponteiro])
     limpa()
-     escreva("Data de entrada-",data[n],"\n")
-        escreva("Nome do proprietário-", nome[n],"\n")
-        escreva("Equipamento-", equipamento[n],"\n")
-        escreva("problema-", problema[n],"\n")
+     escreva("Data de entrada-",data[ponteiro],"\n")
+        escreva("Nome do proprietário-", nome[ponteiro],"\n")
+        escreva("Equipamento-", equipamento[ponteiro],"\n")
+        escreva("problema-", problema[ponteiro],"\n")
 
-          escreva("As informações estão corretas?")
-      escreva("1-SIM\n 2-NÃO")
+          escreva("As informações estão corretas?\n")
+      escreva("1-SIM\n 2-NÃO\n")
       leia(sn)
       escolha(sn){
         caso '1':{
@@ -147,13 +147,15 @@ programa {
     ponteiro--
     escreva("A manutenção foi realizda com sucesso!")
     Util.aguarde(2000)
-     limpa()   menu()
+     limpa()  
+     menu()
   }
   
   funcao lista(){
     limpa()
     se(ponteiro<=0){
       escreva("ERRO: Não ha oque listar")
+      Util.aguarde(2000)
       menu()
     }
       para(n=0;n<ponteiro;n++){
@@ -165,7 +167,7 @@ programa {
         Util.aguarde(1000)
       }
       escreva("Deseja retornar ao menu?")
-      escreva("1-SIM\n 2-NÃO")
+      escreva("1-SIM\n 2-NÃO\n")
       leia(sn)
       escolha(sn){
         caso '1':{
@@ -187,6 +189,11 @@ programa {
   }
   funcao proximo(){
     limpa()
+    se(ponteiro<=1){    
+      escreva("ERRO: Nenhum valor adicionado")
+      Util.aguarde(2000)
+      menu()
+    }
         escreva("proximo equipamento\n")
         escreva("Data de entrada-",data[1],"\n")
         escreva("Nome do proprietário-", nome[1],"\n")
@@ -197,6 +204,11 @@ programa {
   }
   funcao busca(){
     limpa()
+    se(ponteiro<=0){
+      escreva("ERRO: Nenhum valor adicionado")
+      Util.aguarde(2000)
+      menu()
+      }
     escreva("informe o nome do equipamento a buscar\n")
     leia(busca)
      para(n=0;n<ponteiro;n++){
@@ -206,6 +218,7 @@ programa {
         escreva("Equipamento-", equipamento[n],"\n")
         escreva("problema-", problema[n],"\n")
         enco=verdadeiro
+        pare
       }    
         se(nome[n]==busca){
         escreva("Data de entrada-",data[n],"\n")
@@ -213,6 +226,7 @@ programa {
         escreva("Equipamento-", equipamento[n],"\n")
         escreva("problema-", problema[n],"\n")
         enco=verdadeiro
+        pare
       }    
         se(data[n]==busca){
         escreva("Data de entrada-",data[n],"\n")
@@ -220,7 +234,7 @@ programa {
         escreva("Equipamento-", equipamento[n],"\n")
         escreva("problema-", problema[n],"\n")
         enco=verdadeiro
-        
+        pare
       }    
 
     }
@@ -249,13 +263,18 @@ programa {
   }
   funcao status(){
     limpa()
+    se(ponteiro<=0){
+      escreva("ERRO: Nenhum valor adicionado")
+      Util.aguarde(2000)
+      menu()
+      }
     real totalt, total1, total2, a1, a2
     totalt=ponteiro+ponteiro2
     total1=(ponteiro*100)/totalt
     total2=(ponteiro2*100)/totalt  
     a1=Matematica.arredondar(total1, 2)
     a2=Matematica.arredondar(total2, 2)
-    escreva("Há ainda ", ponteiro+1," equipamentos a serem atendidos\n E já foram atendidos ", ponteiro2+1, " equipamentos" )
+    escreva("Há ainda ", ponteiro," equipamentos a serem atendidos\n E já foram atendidos ", ponteiro2, " equipamentos" )
     escreva("\n Há ", total1, "% há ser feito a manuntenção e ", total2, "% que já foi feito")
     escreva("\nDeseja retornar ao menu?\n")
       escreva("1-SIM\n 2-NÃO\n")
@@ -279,7 +298,15 @@ programa {
   }
   funcao lista2(){
     limpa()
+    se(ponteiro2<=0){
+      escreva("ERRO: Não foi feita nehuma manutenção")
+      Util.aguarde(2000)
+      menu()
+      }
     inteiro total=0  
+    se(ponteiro2<=0){
+      escreva("ERRO:Não houve nenhuma manutenção!")
+    }
       para(n=0;n<ponteiro2;n++){
         escreva(n+1, "-equipamento\n")
         escreva("Data de entrada-",data2[n],"\n")
@@ -313,6 +340,11 @@ programa {
   }
   funcao busca2(){
      limpa()
+     se(ponteiro2<=0){
+      escreva("ERRO: Não foi feita a manutenção de nenhum item")
+      Util.aguarde(2000)
+      menu()
+      }
     escreva("informe o nome do equipamento a buscar\n")
     leia(busca)
      para(n=0;n<ponteiro2;n++){
@@ -322,7 +354,27 @@ programa {
         escreva("Equipamento-", equipamento2[n],"\n")
         escreva("problema-", problema2[n],"\n")
         enco=verdadeiro
+        pare
       }    
+       se(nome2[n]==busca){
+        escreva("Data de entrada-",data[n],"\n")
+        escreva("Nome do proprietário-", nome[n],"\n")
+        escreva("Equipamento-", equipamento[n],"\n")
+        escreva("problema-", problema[n],"\n")
+        enco=verdadeiro
+        pare
+      }    
+      se(data2[n]==busca){
+        escreva("Data de entrada-",data[n],"\n")
+        escreva("Nome do proprietário-", nome[n],"\n")
+        escreva("Equipamento-", equipamento[n],"\n")
+        escreva("problema-", problema[n],"\n")
+        enco=verdadeiro
+        pare
+      }    
+        
+        
+          
 
     }
     se(enco==falso){
@@ -330,6 +382,24 @@ programa {
      }
     Util.aguarde(2000)
     
+      escreva("Deseja retornar ao menu?\n")
+      escreva("1-SIM\n 2-NÃO\n")
+      leia(sn)
+      escolha(sn){
+        caso '1':{
+          menu()
+          pare
+        }
+        caso'2':{
+          busca2()
+          pare
+        }
+        caso contrario:{
+          escreva("ERRO: Valor invalido!")
+          busca2()
+          pare
+        }
+      }
   }
 funcao  sair(){
   limpa()
@@ -339,7 +409,7 @@ funcao  sair(){
       escolha(sn){
         caso '1':{
           limpa()
-          escreva("")
+          escreva("Programa finalizado! Obrigado por usar!")
           pare
         }
         caso'2':{
